@@ -1,3 +1,7 @@
+This is my github repository of the project.
+
+
+
 This is the master repository for COS 243 project for the electronic
 bulletin board.  All students should fork their code from this
 repository so they can quickly merge any shared material across
