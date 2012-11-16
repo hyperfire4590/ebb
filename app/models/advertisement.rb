@@ -4,4 +4,5 @@ class Advertisement < ActiveRecord::Base
 	has_many :tiles
 	belongs_to :user
 	belongs_to :board
+	has_many :payment_details, as: :payable
 end

@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
 
 	has_many :boards
 	has_many :advertisements
+	has_many :payment_details
 end

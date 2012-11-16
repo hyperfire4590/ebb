@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121116043302) do
+ActiveRecord::Schema.define(:version => 20121116142714) do
 
   create_table "advertisements", :force => true do |t|
     t.integer  "user_id"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(:version => 20121116043302) do
     t.string   "timezone"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "payment_details", :force => true do |t|
+    t.integer  "user_id"
+    t.decimal  "amount"
+    t.integer  "payable_id"
+    t.integer  "payable_type"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
   create_table "tiles", :force => true do |t|
