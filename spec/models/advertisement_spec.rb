@@ -33,6 +33,24 @@ describe Advertisement do
 
   describe 'validating attributes' do
     describe 'x_location' do
+      describe 'nil' do
+	before { ad.x_location = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { ad.x_location = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { ad.x_location = 'text' }
+
+	it { should_not be_valid }
+      end
+
       describe 'negative' do
 	before { ad.x_location = -1 }
 
@@ -50,6 +68,15 @@ describe Advertisement do
     end
 
     describe 'y_location' do
+      describe 'nil' do
+      end
+
+      describe 'blank' do
+      end
+
+      describe 'text' do
+      end
+
       describe 'negative' do
 	before { ad.y_location = -1 }
 
@@ -67,6 +94,15 @@ describe Advertisement do
     end
 
     describe 'height' do
+      describe 'nil' do
+      end
+
+      describe 'blank' do
+      end
+
+      describe 'text' do
+      end
+
       describe 'negative' do
 	before { ad.height = -1 }
 
@@ -84,6 +120,15 @@ describe Advertisement do
     end
 
     describe 'width' do
+      describe 'nil' do
+      end
+
+      describe 'blank' do
+      end
+
+      describe 'text' do
+      end
+
       describe 'negative' do
 	before { ad.width = -1 }
 

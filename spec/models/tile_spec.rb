@@ -50,6 +50,24 @@ describe Tile do
   #
   describe 'validating attributes' do
     describe 'x_location' do
+      describe 'nil' do
+	before { tile.x_location = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { tile.x_location = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { tile.x_location = 'text' }
+
+	it { should_not be_valid }
+      end
+
       describe 'negative' do
 	before { tile.x_location = -1 }
 
@@ -86,6 +104,22 @@ describe Tile do
     end
 
     describe 'y_location' do
+      describe 'nil' do
+	before { tile.y_location = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { tile.y_location = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { tile.y_location = 'text' }
+      end
+
       describe 'negative' do
 	before { tile.y_location = -1 }
 
@@ -122,6 +156,24 @@ describe Tile do
     end
 
     describe 'cost' do
+      describe 'nil' do
+	before { tile.cost = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { tile.cost = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { tile.cost = 'text' }
+
+	it { should_not be_valid }
+      end
+
       describe 'negative' do
 	before { tile.cost = -1 }
 

@@ -36,6 +36,24 @@ describe Board do
     end
 
     describe 'height' do
+      describe 'nil' do
+	before { board.height = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { board.height = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { board.height = 'text' }
+
+	it { should_not be_valid }
+      end
+
       describe 'negative' do
 	before { board.height = -1 }
 
@@ -50,6 +68,24 @@ describe Board do
     end
 
     describe 'width' do
+      describe 'nil' do
+	before { board.width = nil }
+
+	it { should_not be_valid }
+      end
+
+      describe 'blank' do
+	before { board.width = '' }
+
+	it { should_not be_valid }
+      end
+
+      describe 'text' do
+	before { board.width = 'text' }
+
+	it { should_not be_valid }
+      end
+
       describe 'negative' do
 	before { board.width = -1 }
 
