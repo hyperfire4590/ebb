@@ -5,7 +5,6 @@ class PaymentDetail < ActiveRecord::Base
 	belongs_to :payable, polymorphic: true
 	belongs_to :user
 
-	validates :amount, presence: true,
-		length: { minimum: 1 }	
+	validates :amount, presence: true
 
 end
