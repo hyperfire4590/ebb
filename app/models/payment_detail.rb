@@ -1,6 +1,11 @@
 class PaymentDetail < ActiveRecord::Base
-  attr_accessible :amount, :payable_id, :payable_type, :user_id
+  attr_accessible :amount
+	attr_protected :user_id, :payable_id, :payable_type
 
 	belongs_to :payable, polymorphic: true
 	belongs_to :user
+
+	validates :amount, presence: true,
+		length: { minimum: 1 }	
+
 end
