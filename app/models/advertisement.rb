@@ -16,4 +16,8 @@ class Advertisement < ActiveRecord::Base
 	validates :height, presence: true,
 			:numericality => { :greater_than_or_equal_to => 1 }
 	validates :image, presence: true
+
+	#validates :x_location, :less_than => Board.find_by_id(:board_id).height
+
+
 end
