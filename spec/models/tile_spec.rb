@@ -4,12 +4,11 @@ describe Tile do
   let(:user) { FactoryGirl.create(:user) }
   let(:board) { FactoryGirl.create(:board, user: user) }
   let(:ad) { FactoryGirl.create(:advertisement, user: user, board: board) }
-  let(:tile) { FactoryGirl.create(:tile, board: board, advertisement: ad) }
+  let(:tile) { FactoryGirl.create(:tile, advertisement: ad) }
 
   subject { tile }
 
   it { should respond_to(:board) }
-  it { should respond_to(:board_id) }
   it { should respond_to(:advertisement) }
   it { should respond_to(:advertisement_id) }
   it { should respond_to(:x_location) }
@@ -77,7 +76,7 @@ describe Tile do
       describe 'larger than board width' do
 	before do
 	  tile.x_location = 5
-	  board.width = 5
+	  tile.board.width = 5
 	end
 
 	it { should_not be_valid }
@@ -129,7 +128,7 @@ describe Tile do
       describe 'larger than board height' do
 	before do
 	  tile.y_location = 5
-	  board.height = 5
+	  tile.board.height = 5
 	end
 
 	it { should_not be_valid }
