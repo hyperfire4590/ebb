@@ -3,7 +3,7 @@ class Tile < ActiveRecord::Base
 	attr_protected :cost, :board_id, :advertisement_id
 	
 	belongs_to :advertisement
-	belongs_to :board
+	has_one :board, through: :advertisement
 
 	validates :x_location, presence: true,
 		:numericality => { :greater_than_or_equal_to => 0 }	
