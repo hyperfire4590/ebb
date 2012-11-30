@@ -16,6 +16,8 @@ describe Advertisement do
   it { should respond_to(:board) }
   it { should respond_to(:board_id) }
   it { should respond_to(:image) }
+  it { should respond_to(:image_contents=) }
+  it { should respond_to(:charge) }
 
   describe 'accessible attributes' do
     it 'should not allow access to user_id' do
@@ -57,13 +59,23 @@ describe Advertisement do
 	it { should_not be_valid }
       end
 
-      describe 'larger than board width' do
+      describe 'larger or equal to board width' do
 	before do
 	  ad.x_location = 7
 	  board.width = 7
 	end
 
 	it { should_not be_valid }
+      end
+
+      describe 'smaller than board width' do
+	before do
+	  ad.x_location = 6
+	  ad.width = 1
+	  board.width = 7
+	end
+
+	it { should be_valid }
       end
     end
 
@@ -83,13 +95,23 @@ describe Advertisement do
 	it { should_not be_valid }
       end
 
-      describe 'larger than board height' do
+      describe 'larger or equal to board height' do
 	before do
 	  ad.y_location = 4
 	  board.height = 4
 	end
 
 	it { should_not be_valid }
+      end
+
+      describe 'smaller than board height' do
+	before do
+	  ad.y_location = 3
+	  ad.height = 1
+	  board.height = 4
+	end
+
+	it { should be_valid }
       end
     end
 
@@ -117,6 +139,16 @@ describe Advertisement do
 
 	it { should_not be_valid }
       end
+
+      describe 'equal to or smaller than board height' do
+	before do
+	  ad.y_location = 0
+	  ad.height = 5
+	  board.height = 5
+	end
+
+	it { should be_valid }
+      end
     end
 
     describe 'width' do
@@ -137,11 +169,21 @@ describe Advertisement do
 
       describe 'larger than board width' do
 	before do
-	  ad.width = 6
+	  ad.width = 7
 	  board.width = 6
 	end
 
 	it { should_not be_valid }
+      end
+
+      describe 'equal to or smaller than board width' do
+	before do
+	  ad.x_location = 0
+	  ad.width = 6
+	  board.width = 6
+	end
+
+	it { should be_valid }
       end
     end
 
@@ -163,6 +205,16 @@ describe Advertisement do
 
 	it { should_not be_valid }
       end
+
+      describe 'combined equal to or smaller than board width' do
+	before do
+	  ad.x_location = 3
+	  ad.width = 3
+	  board.width = 6
+	end
+
+	it { should be_valid }
+      end
     end
 
     describe 'y_location & height' do
@@ -174,6 +226,16 @@ describe Advertisement do
 	end
 
 	it { should_not be_valid }
+      end
+
+      describe 'combined equal to or smaller than board height' do
+	before do
+	  ad.y_location = 4
+	  ad.height = 4
+	  board.height = 8
+	end
+
+	it { should be_valid }
       end
     end
   end

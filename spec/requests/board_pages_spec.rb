@@ -65,6 +65,10 @@ describe "BoardPages" do
 	expect { click_button submit }.to change(PaymentDetail, :count).by(1)
       end
 
+      it 'should create fake advertisement' do
+	expect { click_button submit }.to change(Advertisement, :count).by(1)
+      end
+
       describe 'after saving the board' do
 	before { click_button submit }
 

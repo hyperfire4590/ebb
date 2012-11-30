@@ -11,6 +11,7 @@ describe Board do
   it { should respond_to(:user_id) }
   it { should respond_to(:height) }
   it { should respond_to(:width) }
+  it { should respond_to(:age) }
 
   describe 'accessible attributes' do
     it 'should not allow access to user_id' do
