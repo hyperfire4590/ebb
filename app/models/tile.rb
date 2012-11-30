@@ -18,9 +18,9 @@ class Tile < ActiveRecord::Base
 		
 		def check_tile_bounds
 			unless x_location.nil?
-				if x_location >= advertisement.width
+				if x_location >= advertisement.width + advertisement.x_location
 					errors.add(:x_location,
-						"x_location is greater than or equal to ad width.")
+						"x_location is greater than or equal to ad width + x_location.")
 				end
 				if x_location >= board.width
 					errors.add(:x_location,
@@ -32,10 +32,10 @@ class Tile < ActiveRecord::Base
 				end
 			end
 			unless y_location.nil?
-				#if y_location >= advertisement.height
-				#	errors.add(:y_location,
-				#		"y_location is greater than or equal to ad height.")
-				#end
+				if y_location >= advertisement.height + advertisement.y_location
+					errors.add(:y_location,
+						"y_location is greater than or equal to ad height + y_location.")
+				end
 				if y_location >= board.height
 					errors.add(:y_location,
 						"y_location is greater than or equal to board height.")
