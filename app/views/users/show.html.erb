@@ -1,0 +1,16 @@
+<% provide(:title, @user.name) %>
+<h3>Welcome<h3>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user, size: 40 %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+</div>
+<p>
+	<%= link_to "Sign out", signout_path, 
+                              class: "btn btn-large btn-primary" %>
+</p>

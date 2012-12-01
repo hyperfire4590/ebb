@@ -13,6 +13,9 @@ class Tile < ActiveRecord::Base
 		:numericality => { :greater_than_or_equal_to => 0 }
 
 	validate :check_tile_bounds
+	
+	def age
+	end
 
 	private
 		

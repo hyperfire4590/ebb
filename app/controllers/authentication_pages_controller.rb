@@ -1,0 +1,3 @@
+class AuthenticationPagesController < ApplicationController
+
+end

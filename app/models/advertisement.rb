@@ -20,6 +20,13 @@ class Advertisement < ActiveRecord::Base
 	#validates :height, :less_than => Board.find_by_id(:board_id).height
 	validate :check_advertisement_bounds
 
+	def charge
+	end
+	
+	def image_contents=
+	end
+
+
 	private
 
 		def check_advertisement_bounds
@@ -28,7 +35,7 @@ class Advertisement < ActiveRecord::Base
 					errors.add(:x_location, 
 						"Board width is less than or equal to x_location.")
 				end
-				if board.width <= x_location + width
+				if board.width < x_location + width
 					errors.add(:width, 
 						"Board width is less than or equal to x_location plus width.")
 				end
@@ -39,12 +46,12 @@ class Advertisement < ActiveRecord::Base
 					errors.add(:y_location,
 						"Board height is less than or equal to y_location.")
 				end
-				if board.height <= y_location + height
+				if board.height < y_location + height
 					errors.add(:height, 
 						"Board height is less than or equal to y_location plus height.")
 				end
 			end	
-	
+			
 		end
 
 end

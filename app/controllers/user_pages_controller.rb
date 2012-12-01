@@ -1,0 +1,3 @@
+class UserPagesController < ApplicationController
+
+end

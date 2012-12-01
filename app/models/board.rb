@@ -17,5 +17,8 @@ class Board < ActiveRecord::Base
 	validates_inclusion_of :timezone, 
 			:in => ActiveSupport::TimeZone.zones_map(&:to_s)
 
+	def age
+	end
+
 
 end
