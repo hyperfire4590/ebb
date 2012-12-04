@@ -4,7 +4,18 @@ class UsersController < ApplicationController
 	before_filter :admin_user,     only: :destroy
 	
 	def show
-		@user = User. find(params[:id])
+		if signed_in?
+			@user = User.find(params[:id])
+			unless current_user.id == @user.id
+				flash[:error] = "Wrong user"
+				redirect_to(root_path)
+				#render 'show'
+				#@real_user = User.find(params[session[:user_id]])
+			end
+		else
+			flash[:error] = "Not signed in"
+			redirect_to(root_path)
+		end
 	end
 
   def new
@@ -45,7 +56,17 @@ class UsersController < ApplicationController
   
   def index
   	#@users = User.paginate(page: params[:page])
-  	@users = Users.all
+  	if signed_in?
+  		if @current_user.admin
+  			@users = User.all
+  		else 
+  			flash[:error] = "Not an administrator"
+  			redirect_to(root_path)
+  		end
+  	else
+  		flash[:error] = "Not signed in"
+  		redirect_to(signin_path)
+  	end
   end
   
   def destroy

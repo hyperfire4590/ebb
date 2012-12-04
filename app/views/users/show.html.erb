@@ -6,11 +6,13 @@
       <h1>
         <%= gravatar_for @user, size: 40 %>
         <%= @user.name %>
+        <%= @user.email %>
       </h1>
+      <%= button_to "Create board", new_board_path, method: "get", class: "btn btn-large btn-primary" %>
     </section>
   </aside>
 </div>
 <p>
-	<%= link_to "Sign out", signout_path, 
+	<%= link_to "Sign out", signout_path, method: "delete", 
                               class: "btn btn-large btn-primary" %>
 </p>
