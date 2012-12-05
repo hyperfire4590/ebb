@@ -22,6 +22,25 @@ RSpec::Matchers.define :have_error do |expected|
   end
 end
 
+def browser
+  page.driver.browser
+end
+
+RSpec::Matchers.define :eql_element_property_value do |element, property|
+  match do |subject|
+    @value = browser.find_element(:css, element).css_value(property)
+    subject.should == @value
+  end
+
+  failure_message_for_should do |actual|
+    "expected that element #{element}'s CSS property #{property} should be #{actual}, but was #{@value}"
+  end
+
+  failure_message_for_should_not do |actual|
+    "expected that element #{element}'s CSS property #{property} should not be #{actual}"
+  end
+end
+
 def signin(user)
   visit signin_path
   fill_in 'Email', with: user.email

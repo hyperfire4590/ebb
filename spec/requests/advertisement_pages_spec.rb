@@ -48,7 +48,7 @@ describe "AdvertisementPages" do
 	end.to change { Tile.last.id }.by(15)
       end
 
-      describe 'after saving the advertisment' do
+      describe 'after saving the advertisment', js: true do
 	let(:ad) { Advertisement.last }
 	let(:payment) { ad.payment_details.last }
 
@@ -65,6 +65,10 @@ describe "AdvertisementPages" do
 	it { should have_content(ad.y_location) }
 	it { should have_content(ad.user.name) }
 	it { should have_selector("img#ad_#{ad.id}_image") }
+
+	specify { "#{64 * ad.x_location}px".should eql_element_property_value("img#ad_#{ad.id}_image", 'left') }
+	specify { "#{64 * ad.y_location}px".should eql_element_property_value("img#ad_#{ad.id}_image", 'top') }
+	specify { ad.id.to_s.should eql_element_property_value("img#ad_#{ad.id}_image", 'z-index') }
       end
     end
   end

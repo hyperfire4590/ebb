@@ -83,6 +83,11 @@ describe "BoardPages" do
 	it { should have_content(board.height) }
 	it { should have_content(board.timezone) }
 	it { should have_content(board.user.name) }
+
+	describe 'in browser', js: true do
+	  specify { "#{64 * board.width}px".should eql_element_property_value('.ad_container', 'width') }
+	  specify { "#{64 * board.height}px".should eql_element_property_value('.ad_container', 'height') }
+	end
       end
     end
   end
