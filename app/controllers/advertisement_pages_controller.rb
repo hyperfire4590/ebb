@@ -1,3 +1,0 @@
-class AdvertisementPagesController < ApplicationController
-
-end

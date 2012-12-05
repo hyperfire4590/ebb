@@ -1,3 +1,0 @@
-class AuthenticationPagesController < ApplicationController
-
-end

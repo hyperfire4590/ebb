@@ -1,3 +1,0 @@
-class BoardPagesController < ApplicationController
-
-end
