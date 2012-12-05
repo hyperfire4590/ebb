@@ -15,7 +15,7 @@ class BoardsController < ApplicationController
 		if signed_in?
 			@board = Board.new(params[:board])
 			if @board.save
-		    flash[:success] = "New Board"
+		    flash[:success] = "Board created"
 		    redirect_to @board
 		  else
 		  	flash[:error] = "Try again?"
@@ -28,6 +28,9 @@ class BoardsController < ApplicationController
 	end
 	
 	def show
+		@board = Board.find(params[:id])
+		# @user = User.find(params[:user_id])
+		# probably need something about signed_in? here...
 	end
 	
 	def index
@@ -36,6 +39,7 @@ class BoardsController < ApplicationController
 	private
 	
 		def self.up
+			# This does something for creating the timezone dropdown
     	add_column :users, :time_zone, :string, :limit => 255, :default => "UTC"
   	end
 

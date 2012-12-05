@@ -1,9 +1,19 @@
-<% provide(:title, 'Board Showing') %>
+<% provide(:title, @board.name) %>
 <h3>Welcome<h3>
 <div class="row">
   <aside class="span4">
     <section>
-
+			<p>The board goes here.</p>
+			<h1>
+        <%= @board.name %>
+      </h1>
+      <p>
+        Height: <%= pluralize(@board.height, "tile") %> <br />
+        Width: <%= pluralize(@board.width, "tile") %> <br />
+        Timezone: <%= @board.timezone %> <br />
+        Created by: <%= @board.user_id %>
+      </p>
+      <!--  button_to "Create advertisement", new_advertisement_path, method: "get", class: "btn btn-large btn-primary" -->
     </section>
   </aside>
 </div>

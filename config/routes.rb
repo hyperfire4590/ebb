@@ -6,7 +6,7 @@ ElectronicBulletinBoard::Application.routes.draw do
 	resources :boards do
 		resources :advertisements
 	end
-	resources :images
+	#resources :images
 
 	match '/signup', to: 'users#new'
 	match '/signin', to: 'sessions#new'

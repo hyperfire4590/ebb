@@ -3,11 +3,11 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
+      <p>
         <%= gravatar_for @user, size: 40 %>
-        <%= @user.name %>
+        <h1><%= @user.name %></h1>
         <%= @user.email %>
-      </h1>
+      </p>
       <%= button_to "Create board", new_board_path, method: "get", class: "btn btn-large btn-primary" %>
     </section>
   </aside>
