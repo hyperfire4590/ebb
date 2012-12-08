@@ -14,6 +14,7 @@ class BoardsController < ApplicationController
 	def create
 		if signed_in?
 			@board = Board.new(params[:board])
+			@board.user = current_user
 			if @board.save
 		    flash[:success] = "Board created"
 		    redirect_to @board
@@ -29,11 +30,16 @@ class BoardsController < ApplicationController
 	
 	def show
 		@board = Board.find(params[:id])
-		# @user = User.find(params[:user_id])
-		# probably need something about signed_in? here...
+		@user = current_user
 	end
 	
 	def index
+	  if signed_in?
+  		@boards = Board.all
+  	else
+  		flash[:error] = "Not signed in"
+  		redirect_to(signin_path)
+  	end
 	end
 
 	private

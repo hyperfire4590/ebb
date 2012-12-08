@@ -1,17 +1,16 @@
 <%= render 'shared/error_messages', object: f.object %>
 
-<%= f.label :Name %>
-<%= f.text_field :Name %>
+<%= f.label :height %>
+<%= f.text_field :height, :id => "Height" %>
 
-<%= f.label :Height %>
-<%= f.text_field :Height %>
+<%= f.label :width %>
+<%= f.text_field :width, :id => "Width" %>
 
-<%= f.label :Width %>
-<%= f.text_field :Width %>
+<%= f.label :x_location %>
+<%= f.text_field :x_location, :id => "X Location" %>
 
-<%= f.label :X_Location %>
-<%= f.text_field :X_Location %>
+<%= f.label :y_location %>
+<%= f.text_field :y_location, :id => "Y Location" %>
 
-<%= f.label :Y_Location %>
-<%= f.text_field :Y_Location %>
-
+<%= f.label :image_contents %>
+<%= f.file_field :image_contents %>

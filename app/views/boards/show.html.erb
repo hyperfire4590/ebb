@@ -1,21 +1,47 @@
 <% provide(:title, @board.name) %>
-<h3>Welcome<h3>
+<h3>Welcome</h3>
 <div class="row">
-  <aside class="span4">
-    <section>
-			<p>The board goes here.</p>
-			<h1>
-        <%= @board.name %>
-      </h1>
-      <p>
-        Height: <%= pluralize(@board.height, "tile") %> <br />
-        Width: <%= pluralize(@board.width, "tile") %> <br />
-        Timezone: <%= @board.timezone %> <br />
-        Created by: <%= @board.user_id %>
-      </p>
-      <%= button_to "Create advertisement", new_board_advertisement_path, method: "get", class: "btn btn-large btn-primary" %>
-    </section>
-  </aside>
+	<h2>
+    <%= @board.name %>
+  </h2>
+  <p>
+    Height: <%= pluralize(@board.height, "tile") %>, 
+    Width: <%= pluralize(@board.width, "tile") %>, 
+    Timezone: <%= @board.timezone %>, 
+    Created by: <%= @board.user.name %>
+  </p>
+  <%= button_to "Create advertisement", new_board_advertisement_path(@board), method: "get", class: "btn btn-large btn-primary" %>
+</div>
+
+<h2>Advertisement</h2>
+<% if @board.advertisements.any? %>
+	<% @board.advertisements.each do |try| %>
+		<% @current_ad = try %>
+	<% end %>
+        <p>Height: <%= pluralize(@current_ad.height, "tile") %>, 
+    		Width: <%= pluralize(@current_ad.width, "tile") %>, 
+    		X_Location: <%= @current_ad.x_location %>,
+    		Y_Location: <%= @current_ad.y_location %>
+    		User: <%= @current_ad.user.name %>
+  			</p>
+
+	<h3>Advertisements (<%= @board.advertisements.count %>)</h3>
+<% end %>
+  			
+<p>The board goes here.</p>
+<div class="ad_container row" style="position: relative; margin: 0 0 5px 5px; height:<%= 64 * @board.height %>px; width:<%= 64 * @board.width %>px; 
+		background-color: #c0c0c0; color: purple; border: 10px; display: block; z-index: -1 !important;">
+
+<% if @board.advertisements.any? %>
+      <% @board.advertisements.each do |ad| %>
+      	<div>
+      		<img src="<%= url_for(:controller => "images", :action => "show", :id => ad.id) %>" 
+      				height="<%= 64 * ad.height %>px !important" width="<%= 64 * ad.width %>px !important" id="<%= "ad_#{ad.id}_image" %>" style="left: <%= 64 * ad.x_location %>px !important; top: <%= 64 * ad.y_location %>px !important; position: absolute !important; z-index: <%= ad.id %> !important;">
+      	</div>
+      <% end %>
+      	
+<% end %>
+<p>This is text.</p>
 </div>
 <p>
 	<%= link_to "Sign out", signout_path, method: "delete", 
