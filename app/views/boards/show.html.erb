@@ -28,7 +28,6 @@
 	<h3>Advertisements (<%= @board.advertisements.count %>)</h3>
 <% end %>
   			
-<p>The board goes here.</p>
 <div class="ad_container row" style="position: relative; margin: 0 0 5px 5px; height:<%= 64 * @board.height %>px; width:<%= 64 * @board.width %>px; 
 		background-color: #c0c0c0; color: purple; border: 10px; display: block; z-index: -1 !important;">
 
@@ -41,7 +40,6 @@
       <% end %>
       	
 <% end %>
-<p>This is text.</p>
 </div>
 <p>
 	<%= link_to "Sign out", signout_path, method: "delete", 

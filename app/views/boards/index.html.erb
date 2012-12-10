@@ -2,10 +2,12 @@
 <h1>All boards</h1>
 
 <ul class="boards">
-<% if signed_in? %>
-  <%= render @boards %>
-<% else %>
-	<%= link_to "Sign in", signin_path %>
-<% end %>
+	<% @boards.each do |board| %>
+	<li>
+  	<%= link_to board.name, board %>
+  	(<%= board.width %>x<%= board.height %>)
+	</li>
+	<% end %>
+  <%= button_to "Create board", new_board_path, method: "get", class: "btn btn-large btn-primary" %>
 </ul>
 

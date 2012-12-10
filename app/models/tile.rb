@@ -15,6 +15,12 @@ class Tile < ActiveRecord::Base
 	validate :check_tile_bounds
 	
 	def age
+		tileCost = tile.cost.to_f 
+		tileCost = tileCost * 0.5
+		if tileCost < 0.01
+			tileCost = 0.0
+		end
+		tile.cost = tileCost.to_f
 	end
 
 	private
