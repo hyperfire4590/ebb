@@ -29,8 +29,7 @@ class Advertisement < ActiveRecord::Base
 				@tile = board.tiles.where(x_location: x, y_location: y).first
 				if @tile.nil?
 					@tile = tiles.build(x_location: x, y_location: y)
-					theCost = 0
-					@tile.cost = theCost
+					@tile.cost = 0
 					@tile.save
 				else
 					oldCost = @tile.cost
@@ -58,7 +57,7 @@ class Advertisement < ActiveRecord::Base
 	def charge
 		# write a function here
 		@board = Board.find_by_id(board_id)
-		if @board.advertisements.length > 1 # this line may have broken the BigDecimal errors back to undefined method "amount" for nil:NilClass errors
+		if @board.advertisements.length > 1 # this line enforces no PaymentDetails for the default ad
 			@adTiles = tiles
 			finalCost = 0
 			@adTiles.each do |tile|

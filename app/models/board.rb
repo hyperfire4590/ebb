@@ -35,17 +35,21 @@ class Board < ActiveRecord::Base
 
 
 	def age
-		# I don't know how to handle Timezone changes... When is this function called?
-		# Cannot test function until the function is actually called...
-		@tiles = tiles ## This doesn't exist?
-		finalProfit = 0
+			# After much confusion, I think this might actually make sense...
+		@tiles = tiles
+		finalProfit = 0 # amount of money that the Board owner makes?
 		@tiles.each do |tile|
+			tile.age
 			finalProfit = finalProfit + tile.cost
 		end
+		@advertisements = advertisements
+		@advertisements.each do |ad|
+			ad.charge
+		end
 		finalProfit = (finalProfit/2)
-		boardCost = (width * height)
-		finalCost = (boardCost - finalProfit)
-		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: board.id
+		#boardCost = (width * height)
+		#finalCost = (boardCost - finalProfit)
+		@paymentDetail = PaymentDetail.create(amount: finalProfit) #finalCost
 		@paymentDetail.user = user
 		@paymentDetail.payable_type = "board"
 		@paymentDetail.payable_id = id
