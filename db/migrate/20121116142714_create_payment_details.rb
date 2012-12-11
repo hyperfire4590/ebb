@@ -4,7 +4,7 @@ class CreatePaymentDetails < ActiveRecord::Migration
       t.integer :user_id
       t.decimal :amount
       t.integer :payable_id
-      t.integer :payable_type
+      t.string :payable_type
 
       t.timestamps
     end

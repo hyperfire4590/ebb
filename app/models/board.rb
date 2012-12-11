@@ -26,8 +26,9 @@ class Board < ActiveRecord::Base
 	def createFake
 		@advertisement = advertisements.build(width: width, height: height, x_location: 0, y_location: 0, image: "/app/assets/images/default_text.jpg")
 		@advertisement.user = user
-		@paymentDetail = PaymentDetail.create(amount: width*height) #, payable_id: board.id, payable_type: board
+		@paymentDetail = PaymentDetail.create(amount: width*height) #, payable_id: board.id
 		@paymentDetail.user = user
+		@paymentDetail.payable_type = "board"
 		@paymentDetail.save
 	end
 
@@ -43,8 +44,9 @@ class Board < ActiveRecord::Base
 		finalProfit = (finalProfit/2).to_f
 		boardCost = (width * height).to_f
 		finalCost = (boardCost - finalProfit).to_f
-		@paymentDetail = PaymentDetail.create(amount: finalCost, payable_type: board) #, payable_id: board.id, payable_type: board
+		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: board.id, payable_type: board
 		@paymentDetail.user = user
+		@paymentDetail.payable_type = "board"
 		@paymentDetail.save
 	end
 
