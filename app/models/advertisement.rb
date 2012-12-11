@@ -1,4 +1,6 @@
 class Advertisement < ActiveRecord::Base
+	#include ActionView::Helpers::NumberHelper
+
   attr_accessible :height, :image, :width, :x_location, :y_location
 	attr_protected :board_id, :user_id
 
@@ -35,7 +37,7 @@ class Advertisement < ActiveRecord::Base
 					oldCost = @tile.cost
 					@tile.destroy
 					@replace = tiles.build(x_location: x, y_location: y)
-					newCost = oldCost * 2
+					newCost = oldCost * 2  #number_with_precision(oldCost * 2, precision: 2) # DECIMALS
 					if newCost < 1
 						newCost = 1
 					end
@@ -63,6 +65,7 @@ class Advertisement < ActiveRecord::Base
 			@adTiles.each do |tile|
 				finalCost = finalCost + tile.cost
 			end
+			#finalCost = number_with_precision(finalCost, precision: 2) # DECIMALS
 			if finalCost > 0
 				@paymentDetail = PaymentDetail.create(amount: finalCost) # payable_id: advertisement.id
 				@paymentDetail.payable_type = "advertisement"

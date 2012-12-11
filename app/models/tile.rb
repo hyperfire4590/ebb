@@ -1,4 +1,6 @@
 class Tile < ActiveRecord::Base
+	#include ActionView::Helpers::NumberHelper
+	
   attr_accessible :x_location, :y_location
 	attr_protected :cost, :board_id, :advertisement_id
 	
@@ -16,9 +18,9 @@ class Tile < ActiveRecord::Base
 	
 	def age
 		tileCost = cost
-		tileCost = tileCost * 0.5
+		tileCost = tileCost * 0.5  #number_with_precision(tileCost * 0.5, precision: 2) # DECIMALS
 		if tileCost < 0.01
-			tileCost = 0.0
+			tileCost = 0
 		end
 		cost = tileCost
 	end
