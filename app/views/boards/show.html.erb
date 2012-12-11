@@ -33,10 +33,12 @@
 
 <% if @board.advertisements.any? %>
       <% @board.advertisements.each do |ad| %>
+      	<% if (ad.tiles.length > 0) %>
       	<div>
       		<img src="<%= url_for(:controller => "images", :action => "show", :id => ad.id) %>" 
       				height="<%= 64 * ad.height %>px !important" width="<%= 64 * ad.width %>px !important" id="<%= "ad_#{ad.id}_image" %>" style="left: <%= 64 * ad.x_location %>px !important; top: <%= 64 * ad.y_location %>px !important; position: absolute !important; z-index: <%= ad.id %> !important;">
       	</div>
+      	<% end %>
       <% end %>
       	
 <% end %>

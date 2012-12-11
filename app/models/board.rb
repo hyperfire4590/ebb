@@ -17,12 +17,25 @@ class Board < ActiveRecord::Base
 	validates_inclusion_of :timezone, 
 			:in => ActiveSupport::TimeZone.zones_map(&:to_s)
 
-	after_create :createFake
+	before_create :createFake
+	
+	def image_contents=(myImage)
+		self.image = myImage.read
+	end
+	
+	def createFake
+		@advertisement = advertisements.build(width: width, height: height, x_location: 0, y_location: 0, image: "/app/assets/images/default_text.jpg")
+		@advertisement.user = user
+		@paymentDetail = PaymentDetail.create(amount: width*height) #, payable_id: board.id, payable_type: board
+		@paymentDetail.user = user
+		@paymentDetail.save
+	end
+
 
 	def age
 		# I don't know how to handle Timezone changes... When is this function called?
 		# Cannot test function until the function is actually called...
-		@tiles = board.tiles
+		@tiles = tiles ## This doesn't exist?
 		finalProfit = 0
 		@tiles.each do |tile|
 			finalProfit = finalProfit + tile.cost
@@ -30,16 +43,9 @@ class Board < ActiveRecord::Base
 		finalProfit = (finalProfit/2).to_f
 		boardCost = (width * height).to_f
 		finalCost = (boardCost - finalProfit).to_f
-		@paymentDetail = create_payment_detail(amount: finalCost)
+		@paymentDetail = PaymentDetail.create(amount: finalCost, payable_type: board) #, payable_id: board.id, payable_type: board
 		@paymentDetail.user = user
+		@paymentDetail.save
 	end
-	
-	def createFake
-		@advertisement = advertisements.build(width: width, height: height, x_location: 0, y_location: 0, image: "default_text.jpg")
-		@advertisement.user = user
-		@paymentDetail = create_payment_detail(amount: width * height)
-		@paymentDetail.user = user
-	end
-
 
 end

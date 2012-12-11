@@ -25,22 +25,22 @@ class Advertisement < ActiveRecord::Base
 	def createTiles
 		for x in x_location..(x_location + width-1) do
 			for y in y_location..(x_location + height-1) do
-				exist = board.tiles.where(x_location: x, y_location: y).first
-				if exist.nil?
+				@tile = board.tiles.where(x_location: x, y_location: y).first
+				if @tile.nil?
 					@tile = tiles.build(x_location: x, y_location: y)
 					theCost = 0
 					@tile.cost = theCost.to_f
 					@tile.save
 				else
-					oldCost = exist.cost
-					exist.destroy
-					replace = tiles.build(x_location: x, y_location: y)
+					oldCost = @tile.cost
+					@tile.destroy
+					@replace = tiles.build(x_location: x, y_location: y)
 					newCost = oldCost * 2
 					if newCost < 1
 						newCost = 1
 					end
-					replace.cost = newCost.to_f
-					replace.save
+					@replace.cost = newCost.to_f
+					@replace.save
 					#exist.advertisement_id = id
 					#@tile = tiles.build(x_location: x, y_location: y)
 					
@@ -62,7 +62,7 @@ class Advertisement < ActiveRecord::Base
 			finalCost = finalCost + tile.cost
 		end
 		finalCost = finalCost.to_f
-		@paymentDetail = create_payment_detail(amount: finalCost)
+		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: advertisement.id, payable_type: advertisement
 		@paymentDetail.user = user
 	end
 	
