@@ -25,7 +25,7 @@ class Advertisement < ActiveRecord::Base
 
 	def createTiles
 		for x in x_location..(x_location + width-1) do
-			for y in y_location..(x_location + height-1) do
+			for y in y_location..(y_location + height-1) do
 				@tile = board.tiles.where(x_location: x, y_location: y).first
 				if @tile.nil?
 					@tile = tiles.build(x_location: x, y_location: y)
