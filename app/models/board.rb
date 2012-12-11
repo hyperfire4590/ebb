@@ -29,6 +29,7 @@ class Board < ActiveRecord::Base
 		@paymentDetail = PaymentDetail.create(amount: width*height) #, payable_id: board.id
 		@paymentDetail.user = user
 		@paymentDetail.payable_type = "board"
+		@paymentDetail.payable_id = id
 		@paymentDetail.save
 	end
 
@@ -41,12 +42,13 @@ class Board < ActiveRecord::Base
 		@tiles.each do |tile|
 			finalProfit = finalProfit + tile.cost
 		end
-		finalProfit = (finalProfit/2).to_f
-		boardCost = (width * height).to_f
-		finalCost = (boardCost - finalProfit).to_f
-		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: board.id, payable_type: board
+		finalProfit = (finalProfit/2)
+		boardCost = (width * height)
+		finalCost = (boardCost - finalProfit)
+		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: board.id
 		@paymentDetail.user = user
 		@paymentDetail.payable_type = "board"
+		@paymentDetail.payable_id = id
 		@paymentDetail.save
 	end
 

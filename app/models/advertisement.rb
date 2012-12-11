@@ -21,6 +21,7 @@ class Advertisement < ActiveRecord::Base
 	validate :check_advertisement_bounds
 
 	after_create :createTiles
+	after_create :charge
 
 	def createTiles
 		for x in x_location..(x_location + width-1) do
@@ -29,7 +30,7 @@ class Advertisement < ActiveRecord::Base
 				if @tile.nil?
 					@tile = tiles.build(x_location: x, y_location: y)
 					theCost = 0
-					@tile.cost = theCost.to_f
+					@tile.cost = theCost
 					@tile.save
 				else
 					oldCost = @tile.cost
@@ -39,7 +40,7 @@ class Advertisement < ActiveRecord::Base
 					if newCost < 1
 						newCost = 1
 					end
-					@replace.cost = newCost.to_f
+					@replace.cost = newCost
 					@replace.save
 					#exist.advertisement_id = id
 					#@tile = tiles.build(x_location: x, y_location: y)
@@ -56,14 +57,22 @@ class Advertisement < ActiveRecord::Base
 
 	def charge
 		# write a function here
-		@ads = advertisement.tiles
-		finalCost = 0
-		@ads.each do |tile|
-			finalCost = finalCost + tile.cost
+		@board = Board.find_by_id(board_id)
+		if @board.advertisements.length > 1 # this line may have broken the BigDecimal errors back to undefined method "amount" for nil:NilClass errors
+			@adTiles = tiles
+			finalCost = 0
+			@adTiles.each do |tile|
+				finalCost = finalCost + tile.cost
+			end
+			if finalCost > 0
+				@paymentDetail = PaymentDetail.create(amount: finalCost) # payable_id: advertisement.id
+				@paymentDetail.payable_type = "advertisement"
+				@paymentDetail.payable_id = id
+				#@paymentDetail.payable = self # would this line work better?
+				@paymentDetail.user = user
+				@paymentDetail.save
+			end
 		end
-		finalCost = finalCost.to_f
-		@paymentDetail = PaymentDetail.create(amount: finalCost) #, payable_id: advertisement.id, payable_type: advertisement
-		@paymentDetail.user = user
 	end
 	
 	

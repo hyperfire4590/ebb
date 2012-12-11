@@ -4,7 +4,7 @@
 
 /* mixins, variables, etc. */
 
-$grayMediumLight: #eaeaea;
+$grayMediumLight: #add8e6;
 
 @mixin box_sizing {
 	-moz-box-sizing: border-box;
@@ -46,14 +46,14 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 3em;
 	letter-spacing: -2px;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	text-align: center;
 }
 
 h2 {
 	font-size: 1.7em;
 	letter-spacing: -1px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 	text-align: center;
 	font-weight: normal;
 	color: $grayLight;
@@ -62,6 +62,10 @@ h2 {
 P {
 	font-size: 1.1em;
 	line-height: 1.7em;
+}
+
+h3 {
+	color: #0000A0;
 }
 
 /* header */
@@ -80,6 +84,13 @@ P {
 		color: white;
 		text-decoration: none;
 	}
+}
+
+.navbar {
+	background-color: #add8e6;
+}
+.navbar-inner {
+	background-color: #add8e6;
 }
 
 /* footer */
@@ -216,7 +227,7 @@ input, textarea, select, .uneditable-input {
 }
 
 /* microposts */
-
+/*
 .microposts {
   list-style: none;
   margin: 10px 0 0 0;
@@ -242,3 +253,18 @@ aside {
     margin-bottom: 5px;
   }
 }
+*/
+
+/* Special Valerie CSS */
+.leftColumn {
+	width: 475px;
+	float: left;
+	height: 175px;
+}
+.rightColumn {
+	width: 475px;
+	margin-left: 455px;
+	height: 175px;
+	
+}
+

@@ -3,16 +3,12 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <p>
+      <div>
         <%= gravatar_for @user, size: 40 %>
-        <h1><%= @user.name %></h1>
-        <%= @user.email %>
-      </p>
-      <%= button_to "Create board", new_board_path, method: "get", class: "btn btn-large btn-primary" %>
+        <h2><%= @user.name %></h2>
+        <p><%= @user.email %></p>
+      </div>
+      <%= button_to "Create board", new_board_path, method: "get", class: "btn btn-large btn-primary" %>  <%= link_to "Sign out", signout_path, method: "delete", class: "btn btn-large btn-primary" %>
     </section>
   </aside>
 </div>
-<p>
-	<%= link_to "Sign out", signout_path, method: "delete", 
-                              class: "btn btn-large btn-primary" %>
-</p>
